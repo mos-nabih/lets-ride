@@ -1,0 +1,15 @@
+{{define "nav"}}
+<nav class='site-nav' aria-label='Main navigation'>
+    <a href='/'>Ride board</a>
+    {{if .IsAuthenticated}}
+        <a class='nav-action' href='/ride/create'>Post a ride</a>
+        <form action='/user/logout' method='POST'>
+            <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+            <button type='submit'>Sign out</button>
+        </form>
+    {{else}}
+        <a href='/user/signup'>Sign up</a>
+        <a class='nav-action' href='/user/login'>Sign in</a>
+    {{end}}
+</nav>
+{{end}}

@@ -1,0 +1,20 @@
+{{define "title"}}Ride board{{end}}
+
+{{define "main"}}
+<div class='page-heading'>
+    <h1>Upcoming rides</h1>
+    <p>Find a local motorcycle ride and see when to meet.</p>
+</div>
+{{if .Rides}}
+    <ul class='rides'>
+        {{range .Rides}}
+            <li class='ride-row'>
+                <a href='/ride/view/{{.ID}}'>{{.Title}}</a>
+                <time datetime='{{.Departure.Format "2006-01-02T15:04:05Z07:00"}}'>{{departureDate .Departure}}</time>
+            </li>
+        {{end}}
+    </ul>
+{{else}}
+    <p class='empty-state'>No upcoming rides.</p>
+{{end}}
+{{end}}

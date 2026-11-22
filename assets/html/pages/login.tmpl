@@ -1,0 +1,28 @@
+{{define "title"}}Sign in{{end}}
+
+{{define "main"}}
+<h1 class='page-title'>Sign in</h1>
+<form action='/user/login' method='POST' class='page-form' novalidate>
+    <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+    {{range .Form.NonFieldErrors}}
+        <p class='error' role='alert'>{{.}}</p>
+    {{end}}
+    <div class='field'>
+        <label for='email'>Email</label>
+        {{with .Form.FieldErrors.email}}
+            <p class='error' id='email-error'>{{.}}</p>
+        {{end}}
+        <input id='email' type='email' name='email' value='{{.Form.Email}}' autocomplete='username' required
+            {{if .Form.FieldErrors.email}}aria-invalid='true' aria-describedby='email-error'{{end}}>
+    </div>
+    <div class='field'>
+        <label for='password'>Password</label>
+        {{with .Form.FieldErrors.password}}
+            <p class='error' id='password-error'>{{.}}</p>
+        {{end}}
+        <input id='password' type='password' name='password' autocomplete='current-password' required
+            {{if .Form.FieldErrors.password}}aria-invalid='true' aria-describedby='password-error'{{end}}>
+    </div>
+    <button type='submit'>Sign in</button>
+</form>
+{{end}}

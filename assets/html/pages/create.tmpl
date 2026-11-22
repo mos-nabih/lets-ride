@@ -1,0 +1,35 @@
+{{define "title"}}Post a ride{{end}}
+
+{{define "main"}}
+<h1 class='page-title'>Post a ride</h1>
+<form action='/ride/create' method='POST' class='page-form' novalidate>
+    <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+    <div class='field'>
+        <label for='title'>Title</label>
+        {{with .Form.FieldErrors.title}}
+            <p class='error' id='title-error'>{{.}}</p>
+        {{end}}
+        <input id='title' type='text' name='title' value='{{.Form.Title}}' required
+            {{if .Form.FieldErrors.title}}aria-invalid='true' aria-describedby='title-error'{{end}}>
+    </div>
+    <div class='field'>
+        <label for='description'>Description</label>
+        <p class='hint' id='description-hint'>Include the meeting point and any route, pace, or contact details riders should know.</p>
+        {{with .Form.FieldErrors.description}}
+            <p class='error' id='description-error'>{{.}}</p>
+        {{end}}
+        <textarea id='description' name='description' rows='6' required aria-describedby='description-hint{{if .Form.FieldErrors.description}} description-error{{end}}'
+            {{if .Form.FieldErrors.description}}aria-invalid='true'{{end}}>{{.Form.Description}}</textarea>
+    </div>
+    <div class='field'>
+        <label for='departure'>Departure date and time</label>
+        <p class='hint' id='departure-hint'>Use {{if eq boardTimeZone "Local"}}the board’s local time zone{{else}}{{boardTimeZone}}{{end}}.</p>
+        {{with .Form.FieldErrors.departure}}
+            <p class='error' id='departure-error'>{{.}}</p>
+        {{end}}
+        <input id='departure' type='datetime-local' name='departure' value='{{.Form.Departure}}' required aria-describedby='departure-hint{{if .Form.FieldErrors.departure}} departure-error{{end}}'
+            {{if .Form.FieldErrors.departure}}aria-invalid='true'{{end}}>
+    </div>
+    <button type='submit'>Post ride</button>
+</form>
+{{end}}

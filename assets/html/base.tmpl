@@ -1,0 +1,26 @@
+{{define "base"}}
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>{{template "title" .}} · Let’s Ride</title>
+    <link rel='stylesheet' href='/static/css/main.css'>
+</head>
+<body>
+    <header class='site-header'>
+        <div class='shell header-inner'>
+            <a class='wordmark' href='/'>Let’s Ride</a>
+            {{template "nav" .}}
+        </div>
+    </header>
+    <main class='shell'>
+        {{with .Flash}}
+            <p class='flash' role='status'>{{.}}</p>
+        {{end}}
+        {{template "main" .}}
+    </main>
+    <footer class='shell site-footer'>Let’s Ride · {{.CurrentYear}}</footer>
+</body>
+</html>
+{{end}}

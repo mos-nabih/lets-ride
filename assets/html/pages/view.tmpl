@@ -1,0 +1,11 @@
+{{define "title"}}{{.Ride.Title}}{{end}}
+
+{{define "main"}}
+{{with .Ride}}
+<article class='ride-detail'>
+    <h1>{{.Title}}</h1>
+    <p class='departure'>Departs <time datetime='{{.Departure.Format "2006-01-02T15:04:05Z07:00"}}'>{{departureDate .Departure}}</time></p>
+    <div class='description'>{{.Description}}</div>
+</article>
+{{end}}
+{{end}}

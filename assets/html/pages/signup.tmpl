@@ -1,0 +1,35 @@
+{{define "title"}}Sign up{{end}}
+
+{{define "main"}}
+<h1 class='page-title'>Sign up</h1>
+<form action='/user/signup' method='POST' class='page-form' novalidate>
+    <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+    <div class='field'>
+        <label for='name'>Name</label>
+        {{with .Form.FieldErrors.name}}
+            <p class='error' id='name-error'>{{.}}</p>
+        {{end}}
+        <input id='name' type='text' name='name' value='{{.Form.Name}}' autocomplete='name' required
+            {{if .Form.FieldErrors.name}}aria-invalid='true' aria-describedby='name-error'{{end}}>
+    </div>
+    <div class='field'>
+        <label for='email'>Email</label>
+        {{with .Form.FieldErrors.email}}
+            <p class='error' id='email-error'>{{.}}</p>
+        {{end}}
+        <input id='email' type='email' name='email' value='{{.Form.Email}}' autocomplete='username' required
+            {{if .Form.FieldErrors.email}}aria-invalid='true' aria-describedby='email-error'{{end}}>
+    </div>
+    <div class='field'>
+        <label for='password'>Password</label>
+        <p class='hint' id='password-hint'>Use at least 8 characters.</p>
+        {{with .Form.FieldErrors.password}}
+            <p class='error' id='password-error'>{{.}}</p>
+        {{end}}
+        <input id='password' type='password' name='password' autocomplete='new-password' required
+            aria-describedby='password-hint{{if .Form.FieldErrors.password}} password-error{{end}}'
+            {{if .Form.FieldErrors.password}}aria-invalid='true'{{end}}>
+    </div>
+    <button type='submit'>Sign up</button>
+</form>
+{{end}}
